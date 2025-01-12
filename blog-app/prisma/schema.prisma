@@ -7,3 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
+model Post {
+  id         String   @id @default(cuid())
+  title      String
+  content    String?
+  published  Boolean  @default(false)
+  author     User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId   String?
+  authorName String
+  authorEmail String
+}
+
+model User {
+  id    String  @id @default(cuid())
+  email String  @unique
+  name  String?
+  passwordHash String?
+  sessions Session[]
+  posts Post[]
+}
+
+model Session {
+  id        String  @id @default(cuid())
+  token     String  @unique
+  userId    String
+  user      User    @relation(fields: [userId], references: [id],onDelete: Cascade)
+  createdAt DateTime
+  updatedAt DateTime
+}
