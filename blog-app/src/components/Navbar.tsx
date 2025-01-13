@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
@@ -6,10 +7,10 @@ const Navbar = () => {
     <Card className="bg-card py-3 px-4 border-0 flex items-center justify-between gap-6 rounded-2xl mt-5 w-screen">
       <ul className="hidden md:flex items-center gap-10 text-card-foreground">
         <li className="text-primary font-medium">
-          <a href="#home">Home</a>
+          <Link href="/home">Home</Link>
         </li>
         <li>
-          <a href="#features">Blogs</a>
+          <a href="#features">My Blogs</a>
         </li>
       </ul>
 
