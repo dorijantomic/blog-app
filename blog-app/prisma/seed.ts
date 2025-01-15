@@ -39,6 +39,9 @@ const posts = [
 ];
 
 async function seed() {
+  await prisma.user.deleteMany();
+  await prisma.post.deleteMany();
+
   const createdUsers = await Promise.all(
     users.map(async (user) => {
       const passwordHash = await hash(user.password);
@@ -61,6 +64,7 @@ async function seed() {
         authorId: createdUsers[0].id,
         authorName: createdUsers[0].name || "Unknown",
         authorEmail: createdUsers[0].email,
+        description: post.description,
       },
     });
   }
